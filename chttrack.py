@@ -10,6 +10,11 @@ def main(args):
     url = args[1]
     args[0] = 'httrack'  # override argument
 
+    # fix url
+    index = url.find('http')
+    if index != 0:
+        url = 'http://' + url
+
     r = requests.get(url)
     text = r.text.lower()
 
