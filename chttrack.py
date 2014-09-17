@@ -6,7 +6,7 @@ import sys
 
 
 def main(args):
-    errors = ['failed', 'error']
+    errors = ["Couldn't execute query!",]
     url = args[1]
     args[0] = 'httrack'  # override argument
 
