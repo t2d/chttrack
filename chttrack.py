@@ -5,8 +5,19 @@ import subprocess
 import sys
 
 
-def main(args):
-    errors = ["Couldn't execute query!", "Couldn't connect to server!"]
+def main(args, read_stdin=False):
+    if read_stdin:
+        # read errors from stdin
+        errors = list()
+        for line in sys.stdin.readlines():
+            l = line.strip()
+            if l != "":
+                errors.append(l)
+    else:
+        # use standard errors
+        errors = ["Couldn't execute query!", "Couldn't connect to server!"]
+
+    # read arguments
     url = args[1]
     args[0] = 'httrack'  # override argument
 
@@ -17,10 +28,17 @@ def main(args):
 
     r = requests.get(url)
 
+    # check site for errors
     if r.status_code == 200:
         if not any(error in r.text for error in errors):
             subprocess.call(args)
 
 if __name__ == "__main__":
-    arguments = sys.argv
-    main(arguments)
+    # check arguments
+    if len(sys.argv) < 2:
+        print "usage: chttack url {httrack_arguments}"
+    elif "--stdin" in sys.argv:
+        sys.argv.remove("--stdin")
+        main(sys.argv, True)
+    else:
+        main(sys.argv)
