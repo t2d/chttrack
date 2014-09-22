@@ -36,7 +36,8 @@ def main(args, read_stdin=False):
 if __name__ == "__main__":
     # check arguments
     if len(sys.argv) < 2:
-        print "usage: chttack url {httrack_arguments}"
+        print "usage: chttrack.py url {httrack_arguments} {--stdin}"
+        print "       --stdin    read errors to filter for from stdin"
     elif "--stdin" in sys.argv:
         sys.argv.remove("--stdin")
         main(sys.argv, True)
