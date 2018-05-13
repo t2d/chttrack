@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 import requests
 import subprocess
 import sys
@@ -16,6 +17,9 @@ def main(args, read_stdin=False):
     else:
         # use standard errors
         errors = ["Couldn't execute query!", "Couldn't connect to server!"]
+
+    # adjust umask
+    os.umask('u=rwx,g=rx,o=')
 
     # read arguments
     url = args[1]
