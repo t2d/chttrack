@@ -19,7 +19,7 @@ def main(args, read_stdin=False):
         errors = ["Couldn't execute query!", "Couldn't connect to server!"]
 
     # adjust umask
-    os.umask('u=rwx,g=rx,o=')
+    os.umask(027)
 
     # read arguments
     url = args[1]
