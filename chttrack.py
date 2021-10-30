@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 import requests
@@ -19,7 +19,7 @@ def main(args, read_stdin=False):
         errors = ["Couldn't execute query!", "Couldn't connect to server!"]
 
     # adjust umask
-    os.umask(027)
+    os.umask(0o027)
 
     # read arguments
     url = args[1]
@@ -40,8 +40,8 @@ def main(args, read_stdin=False):
 if __name__ == "__main__":
     # check arguments
     if len(sys.argv) < 2:
-        print "usage: chttrack.py url {httrack_arguments} {--stdin}"
-        print "       --stdin    read errors to filter for from stdin"
+        print("usage: chttrack.py url {httrack_arguments} {--stdin}")
+        print("       --stdin    read errors to filter for from stdin")
     elif "--stdin" in sys.argv:
         sys.argv.remove("--stdin")
         main(sys.argv, True)
